@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00F5F5F5"
+    android:orientation="vertical"
+    tools:context=".ChamadoFormActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="25px"
+        android:autoText="true"
+        android:text="Selecione o tipo de denúncia:"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <Spinner
+        android:id="@+id/spTipoDenuncia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="25px" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20px"
+        android:text="Descrição:"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etmDescricao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20px"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="Descreva o seu problema"
+        android:inputType="textMultiLine"
+        android:lines="10"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20px"
+        android:text="Enviar Localização ?"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/rgLocalizacao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20px">
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <RadioButton
+                android:id="@+id/rbLocalizacaoNao"
+                android:layout_width="88dp"
+                android:layout_height="wrap_content"
+                android:text="Não" />
+
+            <RadioButton
+                android:id="@+id/rbLocalizacaoSim"
+                android:layout_width="87dp"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="Sim" />
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20px"
+        android:text="Gostaria de adicionar imagens ?"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btCamera"
+        android:layout_width="78dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20px"
+        android:backgroundTint="#00FFFFFF"
+        android:textColorLink="@color/white"
+        app:icon="@android:drawable/ic_menu_camera"
+        app:iconSize="30dp"
+        app:iconTint="#000000"
+        app:iconTintMode="src_atop" />
+
+    <Button
+        android:id="@+id/btEnviar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10px"
+        android:backgroundTint="#2EC746"
+        android:text="Enviar"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btVoltar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20px"
+        android:backgroundTint="#FFFFFF"
+        android:text="Voltar"
+        android:textColor="#F44336"
+        android:textStyle="bold"
+        app:rippleColor="#E3E3E3"
+        app:strokeColor="#F44336"
+        app:strokeWidth="0.5px" />
+
+</LinearLayout>

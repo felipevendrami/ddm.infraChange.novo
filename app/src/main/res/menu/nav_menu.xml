@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn = "navigation_view">
+
+    <group
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/minhas_solicitaoes"
+            android:title="Minhas solicitações"/>
+
+        <item
+            android:id="@+id/nav_addchamado"
+            android:icon="@drawable/nav_addchamado"
+            android:title="Adicionar chamado"/>
+
+        <item
+            android:id="@+id/nav_chamadosabertos"
+            android:icon="@drawable/nav_chamadosabertos"
+            android:title="Solicitações abertas"/>
+
+        <item
+            android:id="@+id/nav_todoschamados"
+            android:icon="@drawable/nav_todoschamados"
+            android:title="Todas as solicitações"/>
+
+        <item
+            android:title="Outros"/>
+
+        <item
+            android:id="@+id/nav_minhacidade"
+            android:icon="@drawable/nav_minhacidade"
+            android:title="Minha cidade"/>
+
+    </group>
+
+    <item
+        android:title="">
+
+        <menu>
+            <item
+                android:id="@+id/nav_sair"
+                android:icon="@drawable/nav_sair"
+                android:title="Sair"/>
+        </menu>
+
+    </item>
+
+</menu>

@@ -1,1 +1,11 @@
-# ddm.infraChange.novo
+# T1 DDM - InfraChange
+
+DEPARTAMENTO DE ENGENHARIA DE SOFTWARE  
+DISCIPLINA: Desenv. para Dispositivos Móveis   
+PROFESSOR: Mattheus da Hora França
+
+
+Alunos:
+DIOGO SARDAGNA, 
+FELIPE VENDRAMI, 
+MAURICIO BORTOLI

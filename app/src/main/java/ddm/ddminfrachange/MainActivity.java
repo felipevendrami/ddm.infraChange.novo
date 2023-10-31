@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HistoricoSolicitacoesFragment()).commit();
         } else if (id == R.id.nav_minhacidade) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MeuMunicipioFragment()).commit();
+        } else if (id == R.id.nav_editarcadastro) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new EditarUsuarioFragment()).commit();
         } else if (id == R.id.nav_sair) {
             Toast.makeText(this, "Logout!", Toast.LENGTH_SHORT).show();
         }

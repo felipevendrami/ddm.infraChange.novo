@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="#00F5F5F5"
     android:orientation="vertical"
-    tools:context=".ChamadoFormActivity">
+    tools:context="View.ChamadoFormView">
+
 
     <TextView
         android:id="@+id/textView"
@@ -61,8 +62,9 @@
         android:layout_margin="20px">
 
         <RadioGroup
+            android:id="@+id/rgLocalizacao"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <RadioButton
                 android:id="@+id/rbLocalizacaoNao"
@@ -122,5 +124,6 @@
         app:rippleColor="#E3E3E3"
         app:strokeColor="#F44336"
         app:strokeWidth="0.5px" />
+
 
 </LinearLayout>

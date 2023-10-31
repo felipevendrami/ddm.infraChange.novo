@@ -2,7 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="cabecalho">#4764F9</color>
+    <color name="cabecalho">#1C5F14</color>
     <color name="novaSolicitacao">#2EC746</color>
     <color name="solicitacoesAbertas">#2E74C7</color>
     <color name="todasSolicitaoes">#C7A52E</color>

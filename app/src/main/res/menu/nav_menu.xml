@@ -7,10 +7,6 @@
         android:checkableBehavior="single">
 
         <item
-            android:id="@+id/minhas_solicitaoes"
-            android:title="Minhas solicitações"/>
-
-        <item
             android:id="@+id/nav_home"
             android:icon="@drawable/nav_home"
             android:title="Tela Inicial"/>
@@ -29,9 +25,6 @@
             android:id="@+id/nav_todoschamados"
             android:icon="@drawable/nav_todoschamados"
             android:title="Todas as solicitações"/>
-
-        <item
-            android:title="Outros"/>
 
         <item
             android:id="@+id/nav_minhacidade"

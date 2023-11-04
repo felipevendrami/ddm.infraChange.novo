@@ -13,6 +13,20 @@
         android:theme="@style/Theme.DdminfraChange"
         tools:targetApi="31">
         <activity
+            android:name="View.CadastroActivity"
+            android:exported="false" />
+        <activity
+            android:name="View.LoginActivity"
+            android:exported="false">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
             android:name="View.ChamadoFormView"
             android:exported="false" />
         <activity

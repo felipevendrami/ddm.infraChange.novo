@@ -1,4 +1,4 @@
-package ddm.ddminfrachange;
+package View;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -11,18 +11,29 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 
+import Fragment.EditarUsuarioFragment;
+import Fragment.HistoricoSolicitacoesFragment;
+import Fragment.HomeFragment;
+import Fragment.MeuMunicipioFragment;
 import Fragment.NovaSolicitacaoFragment;
+import Fragment.SolicitacoesAbertasFragment;
+import VisualComponent.TelaEspera;
+import ddm.ddminfrachange.R;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
+    public static TelaEspera telaEspera;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        telaEspera = new TelaEspera(this, "Aguarde, carregando ...");
 
         drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -41,11 +52,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        telaEspera.show();
         int id = item.getItemId();
         if (id == R.id.nav_home) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
         } else if (id == R.id.nav_addchamado) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new NovaSolicitacaoFragment(getSupportFragmentManager())).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new NovaSolicitacaoFragment(getSupportFragmentManager(), telaEspera)).commit();
         } else if (id == R.id.nav_chamadosabertos) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SolicitacoesAbertasFragment()).commit();
         } else if (id == R.id.nav_todoschamados) {
@@ -58,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Toast.makeText(this, "Logout!", Toast.LENGTH_SHORT).show();
         }
         drawerLayout.closeDrawer(GravityCompat.START);
+        telaEspera.dismiss();
         return true;
     }
 

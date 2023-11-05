@@ -23,7 +23,7 @@ public class Chamado {
     @Ignore
     private List<ImagemChamado> imagens;
     @NotNull
-    private String situacao = "Em análise";
+    private String situacao = "Aberto";
 
     public Chamado() {
     }

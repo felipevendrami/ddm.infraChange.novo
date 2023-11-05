@@ -30,7 +30,7 @@
             android:name="Fragment.ChamadoFormActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name="View.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>

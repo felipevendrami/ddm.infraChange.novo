@@ -9,13 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import Controller.UsuarioController;
 import Repository.UsuarioRepository;
 import Model.Usuario;
-import ddm.ddminfrachange.MainActivity;
 import ddm.ddminfrachange.R;
 
 public class LoginActivity extends AppCompatActivity {

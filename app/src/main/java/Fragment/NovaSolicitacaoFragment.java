@@ -1,6 +1,5 @@
 package Fragment;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,11 +15,10 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.navigation.Navigation;
 
 import Controller.ChamadoController;
 import Observer.NovaSolicitacaoObserver;
-import ddm.ddminfrachange.HomeFragment;
+import VisualComponent.TelaEspera;
 import ddm.ddminfrachange.R;
 
 public class NovaSolicitacaoFragment extends Fragment implements NovaSolicitacaoObserver {
@@ -30,7 +28,8 @@ public class NovaSolicitacaoFragment extends Fragment implements NovaSolicitacao
     // Tela
     private View view;
     private FragmentManager fragmentManager;
-    // Componentes Visuais
+    private TelaEspera telaEspera;
+    // Componentes da tela
     private Spinner spTipoDenuncia;
     private EditText etmDescricao;
     private RadioGroup rgLocalizacao;
@@ -41,8 +40,9 @@ public class NovaSolicitacaoFragment extends Fragment implements NovaSolicitacao
 
     public NovaSolicitacaoFragment() {}
 
-    public NovaSolicitacaoFragment(FragmentManager fragmentManager) {
+    public NovaSolicitacaoFragment(FragmentManager fragmentManager, TelaEspera telaDeEspera) {
         this.fragmentManager = fragmentManager;
+        this.telaEspera = telaDeEspera;
     }
 
     @Override
@@ -59,7 +59,6 @@ public class NovaSolicitacaoFragment extends Fragment implements NovaSolicitacao
         initComponents();
         initSpinnerOptions();
         initActions();
-
         return view;
     }
 
@@ -83,6 +82,7 @@ public class NovaSolicitacaoFragment extends Fragment implements NovaSolicitacao
                 try {
                     recuperarDados();
                     validaDados();
+                    telaEspera.show();
                     chamadoController.gravarChamado(descricao, tipoDenuncia, enviaLocalizacao);
                 } catch (Exception e) {
                     exibindoToast(e.getMessage());
@@ -123,6 +123,7 @@ public class NovaSolicitacaoFragment extends Fragment implements NovaSolicitacao
 
     @Override
     public void exibindoToast(String mensagem) {
+        this.telaEspera.dismiss();
         Toast.makeText(this.view.getContext(), mensagem, Toast.LENGTH_LONG).show();
     }
 

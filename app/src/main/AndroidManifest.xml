@@ -27,7 +27,7 @@
             <!-- </intent-filter> -->
         </activity>
         <activity
-            android:name="View.ChamadoFormView"
+            android:name="Fragment.ChamadoFormActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

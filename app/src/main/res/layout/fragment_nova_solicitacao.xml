@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#00F5F5F5"
     android:orientation="vertical"
-    tools:context="View.ChamadoFormView">
+    tools:context="Fragment.NovaSolicitacaoFragment">
 
 
     <TextView
@@ -37,7 +37,7 @@
     <EditText
         android:id="@+id/etmDescricao"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="150dp"
         android:layout_margin="20px"
         android:ems="10"
         android:gravity="start|top"
@@ -55,32 +55,25 @@
         android:textSize="20sp"
         android:textStyle="bold" />
 
-    <LinearLayout
+    <RadioGroup
         android:id="@+id/rgLocalizacao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20px">
+        android:orientation="horizontal">
 
-        <RadioGroup
-            android:id="@+id/rgLocalizacao"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <RadioButton
+            android:id="@+id/rbLocalizacaoNao"
+            android:layout_width="88dp"
+            android:layout_height="wrap_content"
+            android:text="Não" />
 
-            <RadioButton
-                android:id="@+id/rbLocalizacaoNao"
-                android:layout_width="88dp"
-                android:layout_height="wrap_content"
-                android:text="Não" />
-
-            <RadioButton
-                android:id="@+id/rbLocalizacaoSim"
-                android:layout_width="87dp"
-                android:layout_height="wrap_content"
-                android:checked="false"
-                android:text="Sim" />
-        </RadioGroup>
-
-    </LinearLayout>
+        <RadioButton
+            android:id="@+id/rbLocalizacaoSim"
+            android:layout_width="87dp"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:text="Sim" />
+    </RadioGroup>
 
     <TextView
         android:id="@+id/textView4"

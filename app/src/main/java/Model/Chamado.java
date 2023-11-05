@@ -4,6 +4,7 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import org.jetbrains.annotations.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(tableName = "chamado")
@@ -14,23 +15,41 @@ public class Chamado {
     @NotNull
     private String cidadao;
     @NotNull
+    private String tipoDenuncia;
+    @NotNull
+    private String descricao;
+    @NotNull
     private boolean localizacao;
     @Ignore
     private List<ImagemChamado> imagens;
     @NotNull
     private String situacao = "Em análise";
-    @NotNull
-    private String tipo;
 
     public Chamado() {
     }
 
-    public Chamado(String cidadao, String situacao, String tipo, boolean localizacao) {
-        this.cidadao = cidadao;
-        this.situacao = situacao;
-        this.tipo = tipo;
-        this.localizacao = localizacao;
-        //this.imagens = new ArrayList<>();
+    public Chamado(String descricao, String tipo) {
+        this.cidadao = "Ciclado";
+        this.descricao = descricao;
+        this.tipoDenuncia = tipo;
+        this.imagens = new ArrayList<>();
+    }
+
+    @NotNull
+    public String getTipoDenuncia() {
+        return tipoDenuncia;
+    }
+
+    public void setTipoDenuncia(@NotNull String tipoDenuncia) {
+        this.tipoDenuncia = tipoDenuncia;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public long getId() {
@@ -73,14 +92,5 @@ public class Chamado {
 
     public void setSituacao(@NotNull String situacao) {
         this.situacao = situacao;
-    }
-
-    @NotNull
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(@NotNull String tipo) {
-        this.tipo = tipo;
     }
 }

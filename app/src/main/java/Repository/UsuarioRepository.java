@@ -2,7 +2,7 @@ package Repository;
 
 import android.content.Context;
 
-//import androidx.room.Room;
+import androidx.room.Room;
 
 import java.util.List;
 
@@ -15,8 +15,8 @@ public class UsuarioRepository {
 
     public UsuarioRepository(Context context) {
         this.context = context;
-//        this.appDataBase = Room.databaseBuilder(context,
-//                AppDataBase.class, "ddm.infraChange").allowMainThreadQueries().build();
+        this.appDataBase = Room.databaseBuilder(context,
+                AppDataBase.class, "ddm.infraChange").allowMainThreadQueries().build();
     }
 
     public boolean insertUsuario(Usuario usuario) {

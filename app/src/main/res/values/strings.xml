@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Infra Change</string>
     <string name="open_nav">Open Navigation Drawer</string>
@@ -10,7 +11,6 @@
         <item>Iluminação Pública</item>
         <item>Prédio Público</item>
         <item>Saneamento</item>
-        <item>Limpeza</item>
-        <item>Limpeza</item>
+        <item>Limpeza Pública</item>
     </string-array>
 </resources>

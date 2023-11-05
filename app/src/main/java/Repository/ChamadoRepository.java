@@ -1,6 +1,8 @@
 package Repository;
 
 import android.content.Context;
+import android.nfc.Tag;
+import android.util.Log;
 
 import androidx.room.Room;
 
@@ -20,12 +22,12 @@ public class ChamadoRepository {
                 AppDataBase.class, "ddm.infraChange").allowMainThreadQueries().build();
     }
 
-    public void insertChamado(Chamado chamado){
+    public void insertChamado(Chamado chamado) throws Exception{
         try {
             appDataBase.chamadoDao().insert(chamado);
         } catch (Exception e){
-            System.out.println(e.getMessage());
-            return;
+            Log.e(null, e.getMessage());
+            throw new Exception("Não foi possível registrar o chamado. Tente novamente.");
         }
     }
 

@@ -1,15 +1,15 @@
 package Model;
 
-//import androidx.room.Entity;
-//import androidx.room.Ignore;
-//import androidx.room.PrimaryKey;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 import org.jetbrains.annotations.NotNull;
 
-//@Entity(tableName = "usuario")
+@Entity(tableName = "usuario")
 public class Usuario {
-//    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey(autoGenerate = true)
     private int id = 0;
-//    @Ignore
+    @Ignore
     private static int cont;
     @NotNull
     private String nome;
@@ -29,6 +29,8 @@ public class Usuario {
     private String email;
     @NotNull
     private String senha;
+
+    public Usuario() {}
 
     public Usuario(String nome, String email, String senha) {
         this.id = cont++;

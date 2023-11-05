@@ -11,6 +11,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 
+import Fragment.NovaSolicitacaoFragment;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
@@ -43,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.nav_home) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
         } else if (id == R.id.nav_addchamado) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new NovaSolicitacaoFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new NovaSolicitacaoFragment(getSupportFragmentManager())).commit();
         } else if (id == R.id.nav_chamadosabertos) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SolicitacoesAbertasFragment()).commit();
         } else if (id == R.id.nav_todoschamados) {

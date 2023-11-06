@@ -23,5 +23,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvChamadosAbertos"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginLeft="25px"
+        android:layout_marginTop="25px"
+        android:layout_marginRight="25px"
+        android:layout_marginBottom="25px" />
 </LinearLayout>

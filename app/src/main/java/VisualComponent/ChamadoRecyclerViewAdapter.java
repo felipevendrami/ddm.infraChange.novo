@@ -12,24 +12,31 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import Model.Chamado;
+import Observer.ChamadoControllerObserver;
 import ddm.ddminfrachange.R;
 
 public class ChamadoRecyclerViewAdapter extends RecyclerView.Adapter<ChamadoRecyclerViewAdapter.ViewHolder> {
 
     private List<Chamado> chamados;
+    private ChamadoControllerObserver chamadoControllerObserver;
+
+    public ChamadoRecyclerViewAdapter(List<Chamado> chamados, ChamadoControllerObserver chamadoControllerObserver) {
+        this.chamados = chamados;
+        this.chamadoControllerObserver = chamadoControllerObserver;
+    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView idChamado;
         TextView tipoChamado;
         TextView situacaoChamado;
-        public ViewHolder(@NonNull  View itemView) {
+
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
             this.idChamado = itemView.findViewById(R.id.idChamado);
             this.tipoChamado = itemView.findViewById(R.id.tipoChamado);
             this.situacaoChamado = itemView.findViewById(R.id.situacaoChamado);
         }
     }
-
 
     @NonNull
     @Override
@@ -43,12 +50,12 @@ public class ChamadoRecyclerViewAdapter extends RecyclerView.Adapter<ChamadoRecy
     @Override
     public void onBindViewHolder(@NonNull ChamadoRecyclerViewAdapter.ViewHolder holder, int position) {
         Chamado chamado = chamados.get(position);
-        holder.idChamado.setText((int) chamado.getId());
+        holder.idChamado.setText("#" + (int) chamado.getId());
         holder.tipoChamado.setText(chamado.getTipoDenuncia());
         holder.situacaoChamado.setText(chamado.getSituacao());
         Context context = holder.itemView.getContext();
         holder.itemView.setOnClickListener(v -> {
-
+            this.chamadoControllerObserver.selecionandoChamado(chamado);
         });
     }
 

@@ -6,11 +6,10 @@
     android:layout_height="match_parent"
     android:background="#00F5F5F5"
     android:orientation="vertical"
-    tools:context="Fragment.NovaSolicitacaoFragment">
-
+    tools:context="Fragment.VisualizacaoSolicitacaoFragment">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tvIdChamado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="25px"
@@ -117,6 +116,5 @@
         app:rippleColor="#E3E3E3"
         app:strokeColor="#F44336"
         app:strokeWidth="0.5px" />
-
 
 </LinearLayout>

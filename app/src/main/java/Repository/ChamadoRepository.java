@@ -31,12 +31,12 @@ public class ChamadoRepository {
         }
     }
 
-    public List<Chamado> retornaChamadosAbertosdaPessoa(String pessoa){
+    public List<Chamado> retornaChamadosAbertosdaPessoa(String pessoa) throws Exception{
         try {
             return appDataBase.chamadoDao().getAllChamadosAbertos(pessoa);
         } catch (Exception e){
-            System.out.println(e.getMessage());
-            return null;
+            Log.e(null, e.getMessage());
+            throw new Exception("Não foi possível carregar os chamados. Tente novamente.");
         }
     }
 
@@ -47,5 +47,9 @@ public class ChamadoRepository {
             System.out.println(e.getMessage());
             return null;
         }
+    }
+
+    public List<Chamado> getAll(){
+        return appDataBase.chamadoDao().getAll();
     }
 }

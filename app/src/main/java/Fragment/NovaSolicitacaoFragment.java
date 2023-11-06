@@ -17,11 +17,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import Controller.ChamadoController;
-import Observer.NovaSolicitacaoObserver;
+import Model.Chamado;
+import Observer.ChamadoFragmentObserver;
+import VisualComponent.ChamadoRecyclerViewAdapter;
 import VisualComponent.TelaEspera;
 import ddm.ddminfrachange.R;
 
-public class NovaSolicitacaoFragment extends Fragment implements NovaSolicitacaoObserver {
+public class NovaSolicitacaoFragment extends Fragment implements ChamadoFragmentObserver {
 
     // Dados recuperados
     private String tipoDenuncia, descricao, enviaLocalizacao;
@@ -130,5 +132,15 @@ public class NovaSolicitacaoFragment extends Fragment implements NovaSolicitacao
     @Override
     public void retornandoHome() {
         this.fragmentManager.beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+    }
+
+    @Override
+    public void carregandoListaChamados(ChamadoRecyclerViewAdapter adapter) {
+        // SEM IMPLEMENTAÇÃO
+    }
+
+    @Override
+    public void carregandoChamadoSelecionado(Chamado chamado) {
+        // SEM IMPLEMENTAÇÃO
     }
 }

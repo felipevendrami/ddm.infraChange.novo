@@ -15,6 +15,9 @@ public interface ChamadoDao {
     @Query("SELECT * FROM chamado WHERE cidadao = :pessoa AND situacao = \"Aberto\"")
     List<Chamado> getAllChamadosAbertos(String pessoa);
 
+    @Query("SELECT * FROM chamado")
+    List<Chamado> getAll();
+
     @Insert
     void insert(Chamado chamado);
 }

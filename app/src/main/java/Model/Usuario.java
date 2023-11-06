@@ -8,9 +8,7 @@ import org.jetbrains.annotations.NotNull;
 @Entity(tableName = "usuario")
 public class Usuario {
     @PrimaryKey(autoGenerate = true)
-    private int id = 0;
-    @Ignore
-    private static int cont;
+    private int id;
     @NotNull
     private String nome;
     @NotNull
@@ -30,10 +28,7 @@ public class Usuario {
     @NotNull
     private String senha;
 
-    public Usuario() {}
-
-    public Usuario(String nome, String email, String senha) {
-        this.id = cont++;
+    public Usuario(@NotNull String nome, @NotNull String cpf, @NotNull String dataNascimento, @NotNull String telefone, @NotNull String logradouro, @NotNull String bairro, @NotNull String numeroResidencial, @NotNull String email, @NotNull String senha) {
         this.nome = nome;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
@@ -44,6 +39,7 @@ public class Usuario {
         this.email = email;
         this.senha = senha;
     }
+
     @NotNull
     public int getId() {
         return id;

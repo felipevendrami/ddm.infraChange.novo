@@ -40,6 +40,7 @@ public class CadastroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
         this.usuarioController = new UsuarioController();
+        this.usuarioRepository = new UsuarioRepository(this);
 
         initComponents();
         initActions();
@@ -51,6 +52,12 @@ public class CadastroActivity extends AppCompatActivity {
             public void onClick(View v) {
                 try {
                     String nome = edtxNome.getText().toString();
+                    String cpf = edtxCpf.getText().toString();
+                    String dataNascimento = edtxDataNascimento.getText().toString();
+                    String telefone = edtxTelefone.getText().toString();
+                    String logradouro = edtxLogradouro.getText().toString();
+                    String bairro = edtxBairro.getText().toString();
+                    String numeroResidencial = edtxNumeroResidencial.getText().toString();
                     String email = edtxEmail.getText().toString();
                     String senha = edtxSenha.getText().toString();
                     String confirmar = edtxConfirmarSenha.getText().toString();
@@ -70,7 +77,7 @@ public class CadastroActivity extends AppCompatActivity {
 
                     if (isValidInput(nome, email, senha)) {
                         // Crie um novo usuário e adicione-o à lista de usuários
-                        Usuario newUser = new Usuario(nome, email, senha);
+                        Usuario newUser = new Usuario(nome, cpf, dataNascimento, telefone, logradouro, bairro, numeroResidencial, email, senha);
                         if (!usuarioRepository.insertUsuario(newUser)) {
                             showMessage("E-mail já cadastrado.");
                             return;
@@ -88,6 +95,10 @@ public class CadastroActivity extends AppCompatActivity {
             }
         });
     }
+
+//    private boolean emBranco(String ) {
+//
+//    }
 
     // Por enquanto, para ser mais simples realizar o cadastro, apenas será necessário informar o nome, email e senha
     private boolean isValidInput(String nome, String email, String senha) {

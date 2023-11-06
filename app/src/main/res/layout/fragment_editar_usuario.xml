@@ -1,16 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="Fragment.EditarUsuarioFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/txtAtualizarCadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Editar Usuário Fragment"
-        android:textSize="30sp"
-        android:layout_centerInParent="true"/>
+        android:layout_margin="25px"
+        android:autoText="true"
+        android:text="Atualização de cadastro"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
-</RelativeLayout>
+    <EditText
+        android:id="@+id/editTextNovoLogradouro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:hint="Novo logradouro"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextNovoBairro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Novo Bairro"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNovoLogradouro" />
+
+    <EditText
+        android:id="@+id/editTextNovoNumeroResidencial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Novo Número Residencial"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNovoBairro" />
+
+    <EditText
+        android:id="@+id/editTextNovoEmailCadastro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Novo Email"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNovoNumeroResidencial" />
+
+    <EditText
+        android:id="@+id/editTextNovaSenhaCadastro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Nova Senha"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNovoEmailCadastro" />
+
+    <EditText
+        android:id="@+id/editTextConfirmarNovaSenha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Confirmar Nova Senha"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNovaSenhaCadastro" />
+
+    <Button
+        android:id="@+id/buttonAtualizarCadastro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Atualizar Cadastro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextConfirmarNovaSenha" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

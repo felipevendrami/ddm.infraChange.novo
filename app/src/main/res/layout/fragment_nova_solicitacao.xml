@@ -89,8 +89,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20px"
         android:backgroundTint="#00FFFFFF"
-        android:textColorLink="@color/white"
-        app:icon="@android:drawable/ic_menu_camera"
+
+        app:icon="@drawable/ic_menu_camera"
         app:iconSize="30dp"
         app:iconTint="#000000"
         app:iconTintMode="src_atop" />

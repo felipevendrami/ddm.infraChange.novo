@@ -9,8 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import Fragment.HomeFragment;
 import Repository.UsuarioRepository;
 import Model.Usuario;
 import ddm.ddminfrachange.R;
@@ -37,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        this.usuarioRepository = new UsuarioRepository(this);
 
         initComponents();
         initActions();
@@ -52,8 +55,10 @@ public class LoginActivity extends AppCompatActivity {
 
                     if (login(email, senha)) {
                         // Autenticação bem-sucedida, vá para a próxima atividade
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
+                      Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+
+                        showMessage("deu boa");
+                       startActivity(intent);
                     } else {
                         showMessage("Login falhou. Verifique suas credenciais.");
                     }
@@ -72,15 +77,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
-//    private boolean login(String email, String senha) {
-//        for (Usuario user : userList) {
-//            if (user.getEmail().equals(email) && user.getSenha().equals(senha)) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
 
     // Função para verificar as credenciais de login
     private boolean login(String email, String senha) {

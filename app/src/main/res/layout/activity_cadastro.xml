@@ -16,35 +16,51 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <com.santalu.maskara.widget.MaskEditText
         android:id="@+id/editTextCPF"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:hint="CPF"
+        android:inputType="number"
+        android:maxLength="11"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNomeCompleto" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextNomeCompleto"
+        app:mask="___.___.___-__"
+        app:maskCharacter="_"
+        tools:ignore="MissingConstraints"
+        app:maskStyle="completable"/>
 
-    <EditText
+    <com.santalu.maskara.widget.MaskEditText
         android:id="@+id/editTextDataNascimento"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:hint="Data de Nascimento"
+        android:inputType="date"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextCPF" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextCPF"
+        app:mask="__/__/____"
+        app:maskCharacter="_"
+        tools:ignore="MissingConstraints"
+        app:maskStyle="completable"/>
 
-    <EditText
+    <com.santalu.maskara.widget.MaskEditText
         android:id="@+id/editTextTelefone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:hint="Telefone"
+        android:inputType="number"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDataNascimento" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextDataNascimento"
+        app:mask="+55 (__) 9____-____"
+        app:maskCharacter="_"
+        tools:ignore="MissingConstraints"
+        app:maskStyle="completable"/>
 
     <EditText
         android:id="@+id/editTextLogradouro"
@@ -52,6 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:hint="Logradouro"
+        android:maxLength="50"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTelefone" />
@@ -62,6 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:hint="Bairro"
+        android:maxLength="50"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextLogradouro" />
@@ -72,6 +90,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:hint="Número Residencial"
+        android:inputType="number"
+        android:maxLength="10"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextBairro" />
@@ -83,6 +103,7 @@
         android:layout_marginTop="10dp"
         android:hint="Email"
         android:minHeight="48dp"
+        android:maxLength="20"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextNumeroResidencial" />
 
@@ -93,6 +114,7 @@
         android:layout_marginTop="10dp"
         android:hint="Senha"
         android:inputType="textPassword"
+        android:maxLength="20"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextEmailCadastro" />
@@ -104,6 +126,7 @@
         android:layout_marginTop="10dp"
         android:hint="Confirmar Senha"
         android:inputType="textPassword"
+        android:maxLength="20"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextSenhaCadastro" />

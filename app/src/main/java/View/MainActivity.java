@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_chamadosabertos) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SolicitacoesAbertasFragment(getSupportFragmentManager())).commit();
         } else if (id == R.id.nav_todoschamados) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HistoricoSolicitacoesFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HistoricoSolicitacoesFragment(getSupportFragmentManager())).commit();
         } else if (id == R.id.nav_minhacidade) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MeuMunicipioFragment()).commit();
         } else if (id == R.id.nav_editarcadastro) {

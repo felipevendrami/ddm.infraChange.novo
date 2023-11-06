@@ -29,7 +29,7 @@ public class Chamado {
     }
 
     public Chamado(String descricao, String tipo) {
-        this.cidadao = "Ciclado";
+        this.cidadao = "Ciclano da Silva";
         this.descricao = descricao;
         this.tipoDenuncia = tipo;
         this.imagens = new ArrayList<>();

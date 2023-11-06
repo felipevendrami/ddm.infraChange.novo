@@ -45,6 +45,7 @@ public class NovaSolicitacaoFragment extends Fragment implements ChamadoFragment
     public NovaSolicitacaoFragment(FragmentManager fragmentManager, TelaEspera telaDeEspera) {
         this.fragmentManager = fragmentManager;
         this.telaEspera = telaDeEspera;
+
     }
 
     @Override
@@ -100,7 +101,7 @@ public class NovaSolicitacaoFragment extends Fragment implements ChamadoFragment
     }
 
     private void validaDados() throws Exception {
-        if(this.descricao.split(" ").length < 0){
+        if(this.descricao.split(" ").length < 4){
             throw new Exception("Sua descrição precisa ter 5 ou mais palavras.");
         }
         if(this.rbSelecionado == null){

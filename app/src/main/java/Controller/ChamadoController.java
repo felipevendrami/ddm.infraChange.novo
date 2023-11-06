@@ -3,6 +3,8 @@ package Controller;
 import android.content.Context;
 
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 
 import java.util.List;
 
@@ -47,7 +49,18 @@ public class ChamadoController implements ChamadoControllerObserver {
 
     public void listarChamadosAbertos() throws Exception{
         try {
-            //ChamadoRecyclerViewAdapter listaChamados = new ChamadoRecyclerViewAdapter(this.chamadoRepository.retornaChamadosAbertosdaPessoa("Ciclado"));
+            //ChamadoRecyclerViewAdapter listaChamados = new ChamadoRecyclerViewAdapter(this.chamadoRepository.retornaChamadosAbertosdaPessoa("Ciclano da Silva"));
+            List<Chamado> listChamados = this.chamadoRepository.retornaChamadosAbertosdaPessoa("Ciclano da Silva");
+            ChamadoRecyclerViewAdapter adapterChamados = new ChamadoRecyclerViewAdapter(listChamados, this);
+            this.fragmentObserver.carregandoListaChamados(adapterChamados);
+            this.fragmentObserver.exibindoToast("Chamados carregados com sucesso !");
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    public void listarTodosChamados() throws Exception{
+        try {
             List<Chamado> listChamados = this.chamadoRepository.getAll();
             ChamadoRecyclerViewAdapter adapterChamados = new ChamadoRecyclerViewAdapter(listChamados, this);
             this.fragmentObserver.carregandoListaChamados(adapterChamados);
@@ -59,7 +72,13 @@ public class ChamadoController implements ChamadoControllerObserver {
 
     @Override
     public void selecionandoChamado(Chamado chamadoSelecionado) {
-        this.fragmentManager.beginTransaction().replace(R.id.fragment_container, new VisualizacaoSolicitacaoFragment(this.fragmentManager, this)).commit();
+        VisualizacaoSolicitacaoFragment visualizacaoFragment = new VisualizacaoSolicitacaoFragment(this.fragmentManager, this);
         this.fragmentObserver.carregandoChamadoSelecionado(chamadoSelecionado);
+        this.fragmentManager.beginTransaction().replace(R.id.fragment_container, visualizacaoFragment).addToBackStack(null).commit();
+        /*FragmentTransaction ft = this.fragmentManager.beginTransaction();
+        ft.replace(R.id.fragment_container, visualizacaoFragment);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        ft.addToBackStack(null);
+        ft.commit();*/
     }
 }

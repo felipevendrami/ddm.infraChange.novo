@@ -1,14 +1,12 @@
 package Repository;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.room.Room;
 
 import java.util.List;
 
 import DAO.AppDataBase;
-import Model.Chamado;
 import Model.Usuario;
 
 public class UsuarioRepository {
@@ -39,15 +37,6 @@ public class UsuarioRepository {
         }
     }
 
-//    public void insertUsuario(Usuario usuario) {
-//        try {
-//            appDataBase.chamadoDao().insert(chamado);
-//        } catch (Exception e){
-//            Log.e(null, e.getMessage());
-//            throw new Exception("Não foi possível registrar o chamado. Tente novamente.");
-//        }
-//    }
-
     public Usuario retornaUsuarioEmail(String email) {
         try {
             appDataBase.usuarioDao().getUsuarioByEmail(email);
@@ -61,7 +50,7 @@ public class UsuarioRepository {
     public List<Usuario> retornaTodosUsuarios() {
         try {
             return appDataBase.usuarioDao().getAllUsuarios();
-        } catch (Exception e) {
+        } catch (Exception e){
             System.out.println(e.getMessage());
             return null;
         }

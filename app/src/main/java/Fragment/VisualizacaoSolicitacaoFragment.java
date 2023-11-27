@@ -1,10 +1,8 @@
 package Fragment;
 
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +10,11 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-
 import Controller.ChamadoController;
 import Model.Chamado;
 import Observer.ChamadoFragmentObserver;
 import VisualComponent.ChamadoRecyclerViewAdapter;
+import VisualComponent.ImagensChamadoRecyclerViewAdapter;
 import ddm.ddminfrachange.R;
 
 public class VisualizacaoSolicitacaoFragment extends Fragment implements ChamadoFragmentObserver {
@@ -86,5 +84,10 @@ public class VisualizacaoSolicitacaoFragment extends Fragment implements Chamado
         this.tvTipoDenuncia.setText(chamado.getTipoDenuncia());
         this.tvDescricao.setText(chamado.getDescricao());
         this.tvSituacao.setText(chamado.getSituacao());
+    }
+
+    @Override
+    public void carregandoBitmapImages(ImagensChamadoRecyclerViewAdapter adapter) {
+        // SEM IMPLEMENTAÇÃO
     }
 }

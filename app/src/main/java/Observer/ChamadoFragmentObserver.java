@@ -2,6 +2,7 @@ package Observer;
 
 import Model.Chamado;
 import VisualComponent.ChamadoRecyclerViewAdapter;
+import VisualComponent.ImagensChamadoRecyclerViewAdapter;
 
 public interface ChamadoFragmentObserver {
 
@@ -9,4 +10,5 @@ public interface ChamadoFragmentObserver {
     void retornandoHome();
     void carregandoListaChamados(ChamadoRecyclerViewAdapter adapter);
     void carregandoChamadoSelecionado(Chamado chamado);
+    void carregandoBitmapImages(ImagensChamadoRecyclerViewAdapter adapter);
 }

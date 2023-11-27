@@ -5,16 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import Controller.ChamadoController;
 import Model.Chamado;
 import Observer.ChamadoFragmentObserver;
 import VisualComponent.ChamadoRecyclerViewAdapter;
+import VisualComponent.ImagensChamadoRecyclerViewAdapter;
 import ddm.ddminfrachange.R;
 public class HistoricoSolicitacoesFragment extends Fragment implements ChamadoFragmentObserver {
 
@@ -71,6 +70,11 @@ public class HistoricoSolicitacoesFragment extends Fragment implements ChamadoFr
 
     @Override
     public void carregandoChamadoSelecionado(Chamado chamado) {
+        // SEM IMPLEMENTAÇÃO
+    }
+
+    @Override
+    public void carregandoBitmapImages(ImagensChamadoRecyclerViewAdapter adapter) {
         // SEM IMPLEMENTAÇÃO
     }
 }

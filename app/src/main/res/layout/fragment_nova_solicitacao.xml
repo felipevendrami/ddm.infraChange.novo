@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00F5F5F5"
+    android:background="#00FFFFFF"
     android:orientation="vertical"
     tools:context="Fragment.VisualizacaoSolicitacaoFragment">
 
@@ -79,30 +79,38 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20px"
-        android:text="Gostaria de adicionar imagens ?"
+        android:text="Adicionar imagens ?"
         android:textSize="20sp"
         android:textStyle="bold" />
 
     <Button
         android:id="@+id/btCamera"
-        android:layout_width="78dp"
+        android:layout_width="163dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20px"
-        android:backgroundTint="#00FFFFFF"
+        android:layout_margin="10px"
+        android:backgroundTint="@color/white"
+        android:text="   Adicionar Fotos"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:drawableStart="@drawable/ic_menu_camera"
+        android:gravity="start|center_vertical" />
 
-        app:icon="@drawable/ic_menu_camera"
-        app:iconSize="30dp"
-        app:iconTint="#000000"
-        app:iconTintMode="src_atop" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvImagens"
+        android:layout_width="match_parent"
+        android:layout_height="93dp"
+        android:layout_margin="25px" />
 
     <Button
         android:id="@+id/btEnviar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10px"
-        android:backgroundTint="#2EC746"
+        android:backgroundTint="@color/cabecalho"
         android:text="Enviar"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"/>
 
     <Button
         android:id="@+id/btVoltar"

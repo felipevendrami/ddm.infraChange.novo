@@ -1,19 +1,17 @@
 package Controller;
 
 import android.content.Context;
+import android.net.Uri;
 
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.Navigation;
-
 import java.util.List;
-
 import Fragment.VisualizacaoSolicitacaoFragment;
 import Model.Chamado;
 import Observer.ChamadoControllerObserver;
 import Observer.ChamadoFragmentObserver;
 import Repository.ChamadoRepository;
 import VisualComponent.ChamadoRecyclerViewAdapter;
+import VisualComponent.ImagensChamadoRecyclerViewAdapter;
 import ddm.ddminfrachange.R;
 
 public class ChamadoController implements ChamadoControllerObserver {
@@ -21,10 +19,12 @@ public class ChamadoController implements ChamadoControllerObserver {
     private ChamadoFragmentObserver fragmentObserver;
     private ChamadoRepository chamadoRepository;
     private FragmentManager fragmentManager;
+    private Context context;
 
     public ChamadoController(ChamadoFragmentObserver fragmentObserver, Context context) {
         this.fragmentObserver = fragmentObserver;
         this.chamadoRepository = new ChamadoRepository(context);
+        this.context = context;
     }
 
     public void setFragmentManager(FragmentManager fragmentManager){
@@ -80,5 +80,22 @@ public class ChamadoController implements ChamadoControllerObserver {
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         ft.addToBackStack(null);
         ft.commit();*/
+    }
+
+    public void listarImagens(List<Uri> pathsImagens) throws Exception{
+        try {
+            ImagensChamadoRecyclerViewAdapter adapterImagens = new ImagensChamadoRecyclerViewAdapter(pathsImagens, this.context, this);
+            this.fragmentObserver.carregandoBitmapImages(adapterImagens);
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    public void listarImagens() throws Exception{
+        try {
+
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
     }
 }

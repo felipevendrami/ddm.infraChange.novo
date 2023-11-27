@@ -10,6 +10,7 @@ import java.util.List;
 
 import DAO.AppDataBase;
 import Model.Chamado;
+import Model.ImagemChamado;
 
 public class ChamadoRepository {
 
@@ -25,9 +26,12 @@ public class ChamadoRepository {
     public void insertChamado(Chamado chamado) throws Exception{
         try {
             appDataBase.chamadoDao().insert(chamado);
+            for(ImagemChamado imagemChamado : chamado.getImagensChamado()){
+                imagemChamado.setIdChamado(appDataBase.chamadoDao().getUltimoChamado().getId());
+                appDataBase.imagemChamadoDao().insert(imagemChamado);
+            }
         } catch (Exception e){
-            Log.e(null, e.getMessage());
-            throw new Exception("Não foi possível registrar o chamado. Tente novamente.");
+            throw new Exception(e.getMessage()/*"Não foi possível registrar o chamado. Tente novamente."*/);
         }
     }
 
@@ -51,5 +55,13 @@ public class ChamadoRepository {
 
     public List<Chamado> getAll(){
         return appDataBase.chamadoDao().getAll();
+    }
+
+    public List<ImagemChamado> getImagensChamado(long idChamado) throws Exception{
+        try {
+            return appDataBase.imagemChamadoDao().getImagensChamadoByIdChamado(idChamado);
+        } catch (Exception e){
+            throw new Exception("Não foi possível buscar as imagens do chamado #" + idChamado + ".");
+        }
     }
 }

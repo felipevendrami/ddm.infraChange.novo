@@ -3,6 +3,9 @@ package Fragment;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,8 +27,8 @@ public class VisualizacaoSolicitacaoFragment extends Fragment implements Chamado
     private FragmentManager fragmentManager;
     // Componentes da tela
     private TextView tvIdChamado,tvTipoDenuncia,tvDescricao,tvSituacao;
-    private RadioGroup rgLocalizacao;
-    private RadioButton rbSelecionado;
+    private RadioButton rbLocalizacaoNao, rbLocalizacaoSim;
+    private RecyclerView rvImagens;
     private Button btVoltar;
     // Controller
     private ChamadoController chamadoController;
@@ -43,8 +46,19 @@ public class VisualizacaoSolicitacaoFragment extends Fragment implements Chamado
                              Bundle savedInstanceState) {
         this.view = inflater.inflate(R.layout.fragment_visualizacao_solicitacao, container, false);
         initComponents();
+        initRecyclerView();
         initActions();
         return view;
+    }
+
+    private void initRecyclerView() {
+        try {
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.view.getContext(), LinearLayoutManager.HORIZONTAL, false);
+            this.rvImagens.setLayoutManager(layoutManager);
+            this.chamadoController.listarImagens();
+        } catch (Exception e) {
+            exibindoToast("Ocorreu algum erro durante a exibição das imagens.");
+        }
     }
 
     private void initActions() {
@@ -61,6 +75,10 @@ public class VisualizacaoSolicitacaoFragment extends Fragment implements Chamado
         this.tvTipoDenuncia = this.view.findViewById(R.id.tvTipoDenuncia);
         this.tvDescricao = this.view.findViewById(R.id.tvDescricao);
         this.tvSituacao = this.view.findViewById(R.id.tvSituacao);
+        this.rvImagens = this.view.findViewById(R.id.rvImagens);
+        this.rbLocalizacaoNao = this.view.findViewById(R.id.rbLocalizacaoNao);
+        this.rbLocalizacaoSim = this.view.findViewById(R.id.rbLocalizacaoSim);
+        this.btVoltar = this.view.findViewById(R.id.btVoltar);
     }
 
     @Override
@@ -80,14 +98,19 @@ public class VisualizacaoSolicitacaoFragment extends Fragment implements Chamado
 
     @Override
     public void carregandoChamadoSelecionado(Chamado chamado) {
-        this.tvIdChamado.setText("Chamado: #" + chamado.getId());
+        this.tvIdChamado.setText("Chamado: #" + (int) chamado.getId());
         this.tvTipoDenuncia.setText(chamado.getTipoDenuncia());
         this.tvDescricao.setText(chamado.getDescricao());
+        if (chamado.isLocalizacao() == true) {
+            this.rbLocalizacaoSim.setChecked(true);
+        } else {
+            this.rbLocalizacaoNao.setChecked(true);
+        }
         this.tvSituacao.setText(chamado.getSituacao());
     }
 
     @Override
     public void carregandoBitmapImages(ImagensChamadoRecyclerViewAdapter adapter) {
-        // SEM IMPLEMENTAÇÃO
+        this.rvImagens.setAdapter(adapter);
     }
 }

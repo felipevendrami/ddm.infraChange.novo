@@ -21,7 +21,7 @@ public class Chamado {
     @NotNull
     private boolean localizacao;
     @Ignore
-    private List<ImagemChamado> imagens;
+    private List<ImagemChamado> imagensChamado;
     @NotNull
     private String situacao = "Aberto";
 
@@ -32,7 +32,7 @@ public class Chamado {
         this.cidadao = "Ciclano da Silva";
         this.descricao = descricao;
         this.tipoDenuncia = tipo;
-        this.imagens = new ArrayList<>();
+        this.imagensChamado = new ArrayList<>();
     }
 
     @NotNull
@@ -77,12 +77,16 @@ public class Chamado {
         this.localizacao = localizacao;
     }
 
-    public List<ImagemChamado> getImagens() {
-        return imagens;
+    public List<ImagemChamado> getImagensChamado() {
+        return imagensChamado;
     }
 
-    public void setImagens(List<ImagemChamado> imagens) {
-        this.imagens = imagens;
+    public void setImagensChamado(List<ImagemChamado> imagens) {
+        this.imagensChamado = imagens;
+    }
+
+    public void addImagemChamado(ImagemChamado img){
+        this.imagensChamado.add(img);
     }
 
     @NotNull

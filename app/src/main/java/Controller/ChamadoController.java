@@ -4,9 +4,13 @@ import android.content.Context;
 import android.net.Uri;
 
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import java.util.ArrayList;
 import java.util.List;
 import Fragment.VisualizacaoSolicitacaoFragment;
 import Model.Chamado;
+import Model.ImagemChamado;
 import Observer.ChamadoControllerObserver;
 import Observer.ChamadoFragmentObserver;
 import Repository.ChamadoRepository;
@@ -20,6 +24,7 @@ public class ChamadoController implements ChamadoControllerObserver {
     private ChamadoRepository chamadoRepository;
     private FragmentManager fragmentManager;
     private Context context;
+    private Chamado chamadoSelecionado;
 
     public ChamadoController(ChamadoFragmentObserver fragmentObserver, Context context) {
         this.fragmentObserver = fragmentObserver;
@@ -35,10 +40,14 @@ public class ChamadoController implements ChamadoControllerObserver {
         this.fragmentObserver = observer;
     }
 
-    public void gravarChamado(String... dados) throws Exception{
+    public void gravarChamado(List<Uri> pathsImagensCapturadas, String... dados) throws Exception{
         try {
             Chamado chamado = new Chamado(dados[0], dados[1]);
-            chamado.setLocalizacao(dados[2] == "Sim" ? true : false);
+            chamado.setLocalizacao(dados[2].equals("Sim") ? true : false);
+            for(Uri uri : pathsImagensCapturadas){
+                ImagemChamado imagemChamado = new ImagemChamado(uri.toString());
+                chamado.addImagemChamado(imagemChamado);
+            }
             this.chamadoRepository.insertChamado(chamado);
             this.fragmentObserver.exibindoToast("Chamado registrado com sucesso !");
             this.fragmentObserver.retornandoHome();
@@ -72,14 +81,10 @@ public class ChamadoController implements ChamadoControllerObserver {
 
     @Override
     public void selecionandoChamado(Chamado chamadoSelecionado) {
-        VisualizacaoSolicitacaoFragment visualizacaoFragment = new VisualizacaoSolicitacaoFragment(this.fragmentManager, this);
+        this.chamadoSelecionado = chamadoSelecionado;
+        FragmentTransaction fragmentTransaction = this.fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, new VisualizacaoSolicitacaoFragment(this.fragmentManager, this)).commitNow();
         this.fragmentObserver.carregandoChamadoSelecionado(chamadoSelecionado);
-        this.fragmentManager.beginTransaction().replace(R.id.fragment_container, visualizacaoFragment).addToBackStack(null).commit();
-        /*FragmentTransaction ft = this.fragmentManager.beginTransaction();
-        ft.replace(R.id.fragment_container, visualizacaoFragment);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        ft.addToBackStack(null);
-        ft.commit();*/
     }
 
     public void listarImagens(List<Uri> pathsImagens) throws Exception{
@@ -93,7 +98,14 @@ public class ChamadoController implements ChamadoControllerObserver {
 
     public void listarImagens() throws Exception{
         try {
-
+            List<ImagemChamado> pathsImagens = this.chamadoRepository.getImagensChamado(chamadoSelecionado.getId());
+            List<Uri> urisImagens = new ArrayList<>();
+            for(ImagemChamado imagemChamado : pathsImagens){
+                Uri uri = Uri.parse(imagemChamado.getPath());
+                urisImagens.add(uri);
+            }
+            ImagensChamadoRecyclerViewAdapter adapterImagens = new ImagensChamadoRecyclerViewAdapter(urisImagens, this.context, this);
+            this.fragmentObserver.carregandoBitmapImages(adapterImagens);
         } catch (Exception e){
             throw new Exception(e.getMessage());
         }

@@ -123,7 +123,7 @@ public class NovaSolicitacaoFragment extends Fragment implements ChamadoFragment
                     recuperarDados();
                     validaDados();
                     telaEspera.show();
-                    chamadoController.gravarChamado(descricao, tipoDenuncia, enviaLocalizacao);
+                    chamadoController.gravarChamado(pathsImagensCapturadas, descricao, tipoDenuncia, enviaLocalizacao);
                 } catch (Exception e) {
                     exibindoToast(e.getMessage());
                 }
@@ -192,6 +192,8 @@ public class NovaSolicitacaoFragment extends Fragment implements ChamadoFragment
         this.tipoDenuncia = spTipoDenuncia.getSelectedItem().toString();
         this.descricao = etmDescricao.getText().toString();
         this.rbSelecionado = this.rgLocalizacao.findViewById(this.rgLocalizacao.getCheckedRadioButtonId());
+        this.enviaLocalizacao = this.rbSelecionado.getText().toString();
+        exibindoToast(this.enviaLocalizacao);
     }
 
     private void initComponents() {

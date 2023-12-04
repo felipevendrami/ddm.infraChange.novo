@@ -8,5 +8,4 @@
     android:padding="16dp"
     android:background="@drawable/img_navegacao"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
-
 </LinearLayout>

@@ -53,15 +53,34 @@ public class LoginActivity extends AppCompatActivity {
                     String email = edtxEmail.getText().toString();
                     String senha = edtxSenha.getText().toString();
 
-                    if (login(email, senha)) {
-                        // Autenticação bem-sucedida, vá para a próxima atividade
-                      Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                    if (login(email, senha)) {
+//                        // Autenticação bem-sucedida, vá para a próxima atividade
+//                      Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//
+//                      showMessage("deu boa");
+//                      startActivity(intent);
+//                    } else {
+//                        showMessage("Login falhou. Verifique suas credenciais.");
+//                    }
 
-                        showMessage("deu boa");
-                       startActivity(intent);
-                    } else {
-                        showMessage("Login falhou. Verifique suas credenciais.");
-                    }
+                    usuarioRepository.retornaTodosUsuarios().observe(LoginActivity.this, usuarios -> {
+                        if (usuarios != null) {
+                            for (Usuario user : usuarios) {
+                                if (user.getEmail().equals(email) && user.getSenha().equals(senha)) {
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+
+                                    showMessage("Login realizado.");
+                                    startActivity(intent);
+                                    return;
+                                }
+                            }
+                            // As credenciais não correspondem a nenhum usuário
+                            showMessage("Credenciais inválidas");
+                        } else {
+                            // Ocorreu um erro ao obter a lista de usuários
+                            showMessage("Erro ao obter lista de usuários");
+                        }
+                    });
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
@@ -79,15 +98,16 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     // Função para verificar as credenciais de login
-    private boolean login(String email, String senha) {
-        userList = usuarioRepository.retornaTodosUsuarios();
-        for (Usuario user : userList) {
-            if (user.getEmail().equals(email) && user.getSenha().equals(senha)) {
-                return true;
-            }
-        }
-        return false;
-    }
+//    private boolean login(String email, String senha) {
+//        userList = usuarioRepository.retornaTodosUsuarios();
+//
+//        for (Usuario user : userList) {
+//            if (user.getEmail().equals(email) && user.getSenha().equals(senha)) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
     // Função para exibir uma mensagem
     public void showMessage(String msg) {

@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        telaEspera = new TelaEspera(this, "Aguarde, carregando ...");
+//        telaEspera = new TelaEspera(this, "Aguarde, carregando ...");
 
         drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);

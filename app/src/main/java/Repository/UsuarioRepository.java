@@ -1,7 +1,10 @@
 package Repository;
 
 import android.content.Context;
+import android.util.Log;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.room.Room;
 
 import java.util.List;
@@ -19,49 +22,151 @@ public class UsuarioRepository {
                 AppDataBase.class, "ddm.infraChange").allowMainThreadQueries().build();
     }
 
-    public boolean insertUsuario(Usuario usuario) {
+//    private <T> LiveData<T> executeOperation(Operation<T> operation) {
+//        MutableLiveData<T> resultLiveData = new MutableLiveData<>();
+//        try {
+//            T result = operation.run();
+//            resultLiveData.setValue(result);
+//        } catch (Exception e) {
+//            Log.e(null, e.getMessage());
+//            resultLiveData.setValue(null);
+//        }
+//        return resultLiveData;
+//    }
+
+    public LiveData<Boolean> insertUsuario(Usuario usuario) {
+        MutableLiveData<Boolean> resultLiveData = new MutableLiveData<>();
+
         try {
-            // Verifique se o email já está cadastrado
-            Usuario existingUser = appDataBase.usuarioDao().getUsuarioByEmail(usuario.getEmail());
-            if (existingUser != null) {
-                // O email já está cadastrado, retorne falso
+            appDataBase.usuarioDao().insert(usuario);
+            resultLiveData.setValue(true);
+        } catch (Exception e) {
+            Log.e("insertUsuario", e.getMessage());
+            resultLiveData.setValue(false);
+        }
+
+        return resultLiveData;
+    }
+
+//    public void insertUsuario(Usuario usuario) {
+//        try {
+//                appDataBase.usuarioDao().insert(usuario);
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
+
+//    public LiveData<Usuario> retornaUsuarioEmail(String email) {
+//        MutableLiveData<Usuario> resultLiveData = new MutableLiveData<>();
+//
+//        try {
+//            Usuario usuario = appDataBase.usuarioDao().getUsuarioByEmail(email);
+//            if (usuario == null) {
+//                resultLiveData.setValue(null);
+//            } else {
+//                resultLiveData.setValue(usuario);
+//            }
+//        } catch (Exception e) {
+//            Log.e("retornaUsuarioEmail", e.getMessage());
+//            resultLiveData.setValue(null);
+//        }
+//
+//        return resultLiveData;
+//    }
+
+//    public LiveData<Boolean> retornaUsuarioEmail(String email) {
+//        MutableLiveData<Usuario> resultLiveData = new MutableLiveData<>();
+//
+//        try {
+//            Usuario usuario = appDataBase.usuarioDao().getUsuarioByEmail(email);
+//            if (usuario != null) {
+//                resultLiveData.setValue(false);
+//            } else {
+//                resultLiveData.setValue(true);
+//            }
+//        } catch (Exception e) {
+//            Log.e("retornaUsuarioEmail", e.getMessage());
+//            resultLiveData.setValue(null);
+//        }
+//
+//        return resultLiveData;
+//    }
+
+    public Boolean retornaUsuarioEmail(String email) {
+//        MutableLiveData<Usuario> resultLiveData = new MutableLiveData<>();
+
+        try {
+            Usuario usuario = appDataBase.usuarioDao().getUsuarioByEmail(email);
+            if (usuario != null) {
                 return false;
             } else {
-                // O email não está cadastrado, prossiga com a inserção
-                appDataBase.usuarioDao().insert(usuario);
                 return true;
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return false;
+            Log.e("retornaUsuarioEmail", e.getMessage());
+//            resultLiveData.setValue(null);
         }
+        return false;
     }
 
-    public Usuario retornaUsuarioEmail(String email) {
+//    public LiveData<Usuario> retornaUsuarioEmail(String email) {
+//        return appDataBase.usuarioDao().getUsuarioByEmail(email);
+//    }
+
+
+//    public Usuario retornaUsuarioEmail(String email) {
+//        try {
+//            appDataBase.usuarioDao().getUsuarioByEmail(email);
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//            return null;
+//        }
+//        return null; // Não sei pq, mas tive q add esse return.
+//    }
+
+    public LiveData<List<Usuario>> retornaTodosUsuarios() {
+        MutableLiveData<List<Usuario>> resultLiveData = new MutableLiveData<>();
+
         try {
-            appDataBase.usuarioDao().getUsuarioByEmail(email);
+            List<Usuario> usuarios = appDataBase.usuarioDao().getAllUsuarios();
+            resultLiveData.setValue(usuarios);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return null;
+            Log.e("retornaTodosUsuarios", e.getMessage());
+            resultLiveData.setValue(null);
         }
-        return null; // Não sei pq, mas tive q add esse return.
+
+        return resultLiveData;
     }
 
-    public List<Usuario> retornaTodosUsuarios() {
+//    public List<Usuario> retornaTodosUsuarios() {
+//        try {
+//            return appDataBase.usuarioDao().getAllUsuarios();
+//        } catch (Exception e){
+//            System.out.println(e.getMessage());
+//            return null;
+//        }
+//    }
+
+    public LiveData<Usuario> retornaUsuarioNome(String nome) {
+        MutableLiveData<Usuario> resultLiveData = new MutableLiveData<>();
+
         try {
-            return appDataBase.usuarioDao().getAllUsuarios();
-        } catch (Exception e){
-            System.out.println(e.getMessage());
-            return null;
+            Usuario usuario = appDataBase.usuarioDao().getUsuarioByEmail(nome);
+            resultLiveData.setValue(usuario);
+        } catch (Exception e) {
+            Log.e("retornaUsuarioNome", e.getMessage());
+            resultLiveData.setValue(null);
         }
+
+        return resultLiveData;
     }
 
-    public List<Usuario> retornaUsuarioNome(String nome) {
-        try {
-            return appDataBase.usuarioDao().getUsuarioByName(nome);
-        } catch (Exception e){
-            System.out.println(e.getMessage());
-            return null;
-        }
-    }
+//    public List<Usuario> retornaUsuarioNome(String nome) {
+//        try {
+//            return appDataBase.usuarioDao().getUsuarioByName(nome);
+//        } catch (Exception e){
+//            System.out.println(e.getMessage());
+//            return null;
+//        }
+//    }
 }

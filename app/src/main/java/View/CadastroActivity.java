@@ -1,6 +1,8 @@
 package View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +17,9 @@ import java.util.regex.Pattern;
 import Controller.UsuarioController;
 import Model.Usuario;
 import Repository.UsuarioRepository;
+
+import ViewModel.CadastroViewModel;
+
 import ddm.ddminfrachange.R;
 
 public class CadastroActivity extends AppCompatActivity {
@@ -29,18 +34,20 @@ public class CadastroActivity extends AppCompatActivity {
     private EditText edtxSenha;
     private EditText edtxConfirmarSenha;
     private Button btnCadastrar;
+    private List<Usuario> userList;
 
-    private UsuarioController usuarioController;
+//    private UsuarioController usuarioController;
     private UsuarioRepository usuarioRepository;
 
-    private List<Usuario> userList;
+    private CadastroViewModel cadastroViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
-        this.usuarioController = new UsuarioController();
+//        this.usuarioController = new UsuarioController();
         this.usuarioRepository = new UsuarioRepository(this);
+        this.cadastroViewModel = new ViewModelProvider(this).get(CadastroViewModel.class);
 
         initComponents();
         initActions();
@@ -76,16 +83,51 @@ public class CadastroActivity extends AppCompatActivity {
                     }
 
                     if (isValidInput(nome, email, senha)) {
+//                        if (usuarioRepository.retornaUsuarioEmail(email) != null) {
+//                            showMessage("E-mail já cadastrado.");
+//                            return;
+//                        }
+//
+//                        // Crie um novo usuário e adicione-o à lista de usuários
+//                        Usuario newUser = new Usuario(nome, cpf, dataNascimento, telefone, logradouro, bairro, numeroResidencial, email, senha);
+//                        usuarioRepository.insertUsuario(newUser);
+//
+//                        showMessage("Cadastro bem-sucedido.");
+//                        // Volte para a tela de login
+//                        finish();
+
+//                        usuarioRepository.retornaUsuarioEmail(email).observe(CadastroActivity.this, usuario -> {
+//                            if (usuario != null) {
+//                                // Usuário encontrado com o email fornecido, indicando que o email já está cadastrado
+//                                showMessage("E-mail já cadastrado.");
+//                                finish();
+//                            }
+//                        });
+
+//                        cadastroViewModel.validarEmail(email).observe(CadastroActivity.this, new Observer<Boolean>() {
+//                            @Override
+//                            public void onChanged(Boolean sucesso) {
+//                                if (sucesso) {
+//                                    showMessage("E-mail já cadastrado.");
+//                                    finish();
+//                                    return;
+//                                }
+//                            }
+//                        });
+
                         // Crie um novo usuário e adicione-o à lista de usuários
                         Usuario newUser = new Usuario(nome, cpf, dataNascimento, telefone, logradouro, bairro, numeroResidencial, email, senha);
-                        if (!usuarioRepository.insertUsuario(newUser)) {
-                            showMessage("E-mail já cadastrado.");
-                            return;
-                        }
-
-                        showMessage("Cadastro bem-sucedido.");
-                        // Volte para a tela de login
-                        finish();
+                        cadastroViewModel.cadastrarUsuario(newUser).observe(CadastroActivity.this, new Observer<Boolean>() {
+                            @Override
+                            public void onChanged(Boolean sucesso) {
+                                if (sucesso) {
+                                    showMessage("Cadastro bem-sucedido.");
+                                    finish();
+                                } else {
+                                    showMessage("Email já cadastrado.");
+                                }
+                            }
+                        });
                     } else {
                         showMessage("Preencha todos os campos corretamente.");
                     }

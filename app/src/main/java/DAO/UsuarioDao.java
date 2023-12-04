@@ -16,7 +16,7 @@ public interface UsuarioDao {
     @Query("SELECT * FROM usuario")
     List<Usuario> getAllUsuarios();
     @Query("SELECT * FROM usuario WHERE nome = :nome")
-    List<Usuario> getUsuarioByName(String nome);
+    Usuario getUsuarioByName(String nome);
     @Query("SELECT * FROM usuario WHERE email = :email")
     Usuario getUsuarioByEmail(String email);
 }

@@ -41,5 +41,4 @@
         app:menu="@menu/nav_menu"
         app:itemIconTint="@color/cabecalho"/>
 
-
 </androidx.drawerlayout.widget.DrawerLayout>

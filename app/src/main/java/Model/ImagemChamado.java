@@ -16,6 +16,7 @@ public class ImagemChamado {
     public ImagemChamado() {}
 
     public ImagemChamado(String path){
+
         this.path = path;
     }
 

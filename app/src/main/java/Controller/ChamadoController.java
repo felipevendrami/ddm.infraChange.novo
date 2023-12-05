@@ -11,6 +11,7 @@ import java.util.List;
 import Fragment.VisualizacaoSolicitacaoFragment;
 import Model.Chamado;
 import Model.ImagemChamado;
+import Model.LocalizacaoChamado;
 import Observer.ChamadoControllerObserver;
 import Observer.ChamadoFragmentObserver;
 import Repository.ChamadoRepository;
@@ -40,7 +41,7 @@ public class ChamadoController implements ChamadoControllerObserver {
         this.fragmentObserver = observer;
     }
 
-    public void gravarChamado(List<Uri> pathsImagensCapturadas, String... dados) throws Exception{
+    public void gravarChamado(LocalizacaoChamado localizacaoChamado, List<Uri> pathsImagensCapturadas, String... dados) throws Exception{
         try {
             Chamado chamado = new Chamado(dados[0], dados[1]);
             chamado.setLocalizacao(dados[2].equals("Sim") ? true : false);
@@ -48,7 +49,7 @@ public class ChamadoController implements ChamadoControllerObserver {
                 ImagemChamado imagemChamado = new ImagemChamado(uri.toString());
                 chamado.addImagemChamado(imagemChamado);
             }
-            this.chamadoRepository.insertChamado(chamado);
+            this.chamadoRepository.insertChamado(chamado, localizacaoChamado);
             this.fragmentObserver.exibindoToast("Chamado registrado com sucesso !");
             this.fragmentObserver.retornandoHome();
         } catch (Exception e){

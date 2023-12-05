@@ -193,6 +193,7 @@ public class NovaSolicitacaoFragment extends Fragment implements ChamadoFragment
         this.descricao = etmDescricao.getText().toString();
         this.rbSelecionado = this.rgLocalizacao.findViewById(this.rgLocalizacao.getCheckedRadioButtonId());
         this.enviaLocalizacao = this.rbSelecionado.getText().toString();
+        exibindoToast(this.enviaLocalizacao);
     }
 
     private void initComponents() {

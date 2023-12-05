@@ -11,6 +11,7 @@ import java.util.List;
 import DAO.AppDataBase;
 import Model.Chamado;
 import Model.ImagemChamado;
+import Model.LocalizacaoChamado;
 
 public class ChamadoRepository {
 
@@ -23,9 +24,11 @@ public class ChamadoRepository {
                 AppDataBase.class, "ddm.infraChange").allowMainThreadQueries().build();
     }
 
-    public void insertChamado(Chamado chamado) throws Exception{
+    public void insertChamado(Chamado chamado, LocalizacaoChamado localizacaoChamado) throws Exception{
         try {
             appDataBase.chamadoDao().insert(chamado);
+            localizacaoChamado.setId(appDataBase.chamadoDao().getUltimoChamado().getId());
+            appDataBase.localizacaoChamadoDAO().insert(localizacaoChamado);
             for(ImagemChamado imagemChamado : chamado.getImagensChamado()){
                 imagemChamado.setIdChamado(appDataBase.chamadoDao().getUltimoChamado().getId());
                 appDataBase.imagemChamadoDao().insert(imagemChamado);

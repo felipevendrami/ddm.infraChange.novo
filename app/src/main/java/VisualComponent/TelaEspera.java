@@ -9,4 +9,9 @@ public class TelaEspera extends ProgressDialog {
         super(context);
         setMessage(mensagem);
     }
+
+    @Override
+    public void show() {
+        super.show();
+    }
 }

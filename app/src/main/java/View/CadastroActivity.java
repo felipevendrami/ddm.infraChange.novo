@@ -36,7 +36,7 @@ public class CadastroActivity extends AppCompatActivity {
     private Button btnCadastrar;
     private List<Usuario> userList;
 
-//    private UsuarioController usuarioController;
+    //    private UsuarioController usuarioController;
     private UsuarioRepository usuarioRepository;
 
     private CadastroViewModel cadastroViewModel;
@@ -96,25 +96,6 @@ public class CadastroActivity extends AppCompatActivity {
 //                        // Volte para a tela de login
 //                        finish();
 
-//                        usuarioRepository.retornaUsuarioEmail(email).observe(CadastroActivity.this, usuario -> {
-//                            if (usuario != null) {
-//                                // Usuário encontrado com o email fornecido, indicando que o email já está cadastrado
-//                                showMessage("E-mail já cadastrado.");
-//                                finish();
-//                            }
-//                        });
-
-//                        cadastroViewModel.validarEmail(email).observe(CadastroActivity.this, new Observer<Boolean>() {
-//                            @Override
-//                            public void onChanged(Boolean sucesso) {
-//                                if (sucesso) {
-//                                    showMessage("E-mail já cadastrado.");
-//                                    finish();
-//                                    return;
-//                                }
-//                            }
-//                        });
-
                         // Crie um novo usuário e adicione-o à lista de usuários
                         Usuario newUser = new Usuario(nome, cpf, dataNascimento, telefone, logradouro, bairro, numeroResidencial, email, senha);
                         cadastroViewModel.cadastrarUsuario(newUser).observe(CadastroActivity.this, new Observer<Boolean>() {
@@ -137,10 +118,6 @@ public class CadastroActivity extends AppCompatActivity {
             }
         });
     }
-
-//    private boolean emBranco(String ) {
-//
-//    }
 
     // Por enquanto, para ser mais simples realizar o cadastro, apenas será necessário informar o nome, email e senha
     private boolean isValidInput(String nome, String email, String senha) {

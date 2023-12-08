@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.room.Room;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import DAO.AppDataBase;
@@ -15,6 +16,8 @@ import Model.Usuario;
 public class UsuarioRepository {
     private Context context;
     private AppDataBase appDataBase;
+//    private MutableLiveData<Boolean> resultLiveData;
+    private MutableLiveData<Usuario> resultLiveData;
 
     public UsuarioRepository(Context context) {
         this.context = context;
@@ -34,30 +37,30 @@ public class UsuarioRepository {
 //        return resultLiveData;
 //    }
 
-    public LiveData<Boolean> insertUsuario(Usuario usuario) {
-        MutableLiveData<Boolean> resultLiveData = new MutableLiveData<>();
-
-        try {
-            appDataBase.usuarioDao().insert(usuario);
-            resultLiveData.setValue(true);
-        } catch (Exception e) {
-            Log.e("insertUsuario", e.getMessage());
-            resultLiveData.setValue(false);
-        }
-
-        return resultLiveData;
-    }
-
-//    public void insertUsuario(Usuario usuario) {
+//    public LiveData<Boolean> insertUsuario(Usuario usuario) {
+//        this.resultLiveData = new MutableLiveData<>();
+//
 //        try {
-//                appDataBase.usuarioDao().insert(usuario);
+//            appDataBase.usuarioDao().insert(usuario);
+//            resultLiveData.setValue(true);
 //        } catch (Exception e) {
-//            System.out.println(e.getMessage());
+//            Log.e("insertUsuario", e.getMessage());
+//            resultLiveData.setValue(false);
 //        }
+//
+//        return resultLiveData;
 //    }
 
+    public void insertUsuario(Usuario usuario) {
+        try {
+            appDataBase.usuarioDao().insert(usuario);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 //    public LiveData<Usuario> retornaUsuarioEmail(String email) {
-//        MutableLiveData<Usuario> resultLiveData = new MutableLiveData<>();
+//        this.resultLiveData = new MutableLiveData<>();
 //
 //        try {
 //            Usuario usuario = appDataBase.usuarioDao().getUsuarioByEmail(email);
@@ -93,8 +96,6 @@ public class UsuarioRepository {
 //    }
 
     public Boolean retornaUsuarioEmail(String email) {
-//        MutableLiveData<Usuario> resultLiveData = new MutableLiveData<>();
-
         try {
             Usuario usuario = appDataBase.usuarioDao().getUsuarioByEmail(email);
             if (usuario != null) {
@@ -104,7 +105,6 @@ public class UsuarioRepository {
             }
         } catch (Exception e) {
             Log.e("retornaUsuarioEmail", e.getMessage());
-//            resultLiveData.setValue(null);
         }
         return false;
     }
@@ -124,42 +124,59 @@ public class UsuarioRepository {
 //        return null; // Não sei pq, mas tive q add esse return.
 //    }
 
-    public LiveData<List<Usuario>> retornaTodosUsuarios() {
-        MutableLiveData<List<Usuario>> resultLiveData = new MutableLiveData<>();
-
-        try {
-            List<Usuario> usuarios = appDataBase.usuarioDao().getAllUsuarios();
-            resultLiveData.setValue(usuarios);
-        } catch (Exception e) {
-            Log.e("retornaTodosUsuarios", e.getMessage());
-            resultLiveData.setValue(null);
-        }
-
-        return resultLiveData;
-    }
-
-//    public List<Usuario> retornaTodosUsuarios() {
+//    public LiveData<List<Usuario>> retornaTodosUsuarios() {
+//        this.resultLiveDataUsuarios = new MutableLiveData<>();
+//
 //        try {
-//            return appDataBase.usuarioDao().getAllUsuarios();
-//        } catch (Exception e){
-//            System.out.println(e.getMessage());
-//            return null;
+//            usuarios = appDataBase.usuarioDao().getAllUsuarios();
+//            resultLiveDataUsuarios.setValue(usuarios);
+//        } catch (Exception e) {
+//            Log.e("retornaTodosUsuarios", e.getMessage());
+//            resultLiveDataUsuarios.setValue(null);
 //        }
+//
+//        return resultLiveDataUsuarios;
 //    }
 
-    public LiveData<Usuario> retornaUsuarioNome(String nome) {
-        MutableLiveData<Usuario> resultLiveData = new MutableLiveData<>();
+//    public Boolean retornaTodosUsuarios() {
+////        this.resultLiveDataUsuarios = new MutableLiveData<>();
+//
+//        try {
+//            usuarios = appDataBase.usuarioDao().getAllUsuarios();
+//            resultLiveDataUsuarios.setValue(usuarios);
+//        } catch (Exception e) {
+//            Log.e("retornaTodosUsuarios", e.getMessage());
+//            resultLiveDataUsuarios.setValue(null);
+//        }
+//
+//        return resultLiveDataUsuarios;
+//    }
 
+    public List<Usuario> retornaTodosUsuarios() {
         try {
-            Usuario usuario = appDataBase.usuarioDao().getUsuarioByEmail(nome);
-            resultLiveData.setValue(usuario);
-        } catch (Exception e) {
-            Log.e("retornaUsuarioNome", e.getMessage());
-            resultLiveData.setValue(null);
+            return appDataBase.usuarioDao().getAllUsuarios();
+//            return usuarios;
+        } catch (Exception e){
+//            System.out.println(e.getMessage());
+            Log.e("retornaTodosUsuarios", e.getMessage());
+            return null;
         }
-
-        return resultLiveData;
     }
+
+//    public LiveData<Usuario> retornaUsuarioNome(String nome) {
+//        MutableLiveData<Usuario> resultLiveData = new MutableLiveData<>();
+//
+//        try {
+//            Usuario usuario = appDataBase.usuarioDao().getUsuarioByEmail(nome);
+//            resultLiveData.setValue(usuario);
+//        } catch (Exception e) {
+//            Log.e("retornaUsuarioNome", e.getMessage());
+//            resultLiveData.setValue(null);
+//        }
+//
+//        return resultLiveData;
+//    }
+
 
 //    public List<Usuario> retornaUsuarioNome(String nome) {
 //        try {

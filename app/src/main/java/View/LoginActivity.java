@@ -1,6 +1,8 @@
 package View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import java.util.List;
 import Fragment.HomeFragment;
 import Repository.UsuarioRepository;
 import Model.Usuario;
+import ViewModel.CadastroViewModel;
 import ddm.ddminfrachange.R;
 
 public class LoginActivity extends AppCompatActivity {
@@ -35,11 +38,14 @@ public class LoginActivity extends AppCompatActivity {
 
     private List<Usuario> userList;
 
+    private CadastroViewModel cadastroViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         this.usuarioRepository = new UsuarioRepository(this);
+        this.cadastroViewModel = new ViewModelProvider(this).get(CadastroViewModel.class);
 
         initComponents();
         initActions();
@@ -63,22 +69,16 @@ public class LoginActivity extends AppCompatActivity {
 //                        showMessage("Login falhou. Verifique suas credenciais.");
 //                    }
 
-                    usuarioRepository.retornaTodosUsuarios().observe(LoginActivity.this, usuarios -> {
-                        if (usuarios != null) {
-                            for (Usuario user : usuarios) {
-                                if (user.getEmail().equals(email) && user.getSenha().equals(senha)) {
-                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-
-                                    showMessage("Login realizado.");
-                                    startActivity(intent);
-                                    return;
-                                }
+                    cadastroViewModel.validarLogin(email, senha).observe(LoginActivity.this, new Observer<Boolean>() {
+                        @Override
+                        public void onChanged(Boolean sucesso) {
+                            if (sucesso) {
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                showMessage("Login realizado.");
+                                startActivity(intent);
+                            } else {
+                                showMessage("Credenciais inválidas");
                             }
-                            // As credenciais não correspondem a nenhum usuário
-                            showMessage("Credenciais inválidas");
-                        } else {
-                            // Ocorreu um erro ao obter a lista de usuários
-                            showMessage("Erro ao obter lista de usuários");
                         }
                     });
                 } catch (Exception e) {

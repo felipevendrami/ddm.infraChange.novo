@@ -91,7 +91,7 @@ public class NovaSolicitacaoFragment extends Fragment implements ChamadoFragment
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.view.getContext(), LinearLayoutManager.HORIZONTAL, false);
         this.rvImagens.setLayoutManager(layoutManager);
     }
-
+ 
     private void initSpinnerOptions() {
         ArrayAdapter<CharSequence> adapterSpinner = ArrayAdapter.createFromResource(this.view.getContext(), R.array.tipos_denuncia, android.R.layout.simple_spinner_item);
         adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

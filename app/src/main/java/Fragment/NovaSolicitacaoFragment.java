@@ -4,8 +4,10 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -31,6 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 import Controller.ChamadoController;
 import Model.Chamado;
+import Model.LocalizacaoChamado;
 import Observer.ChamadoFragmentObserver;
 import VisualComponent.ChamadoRecyclerViewAdapter;
 import VisualComponent.ImagensChamadoRecyclerViewAdapter;
@@ -58,6 +61,7 @@ public class NovaSolicitacaoFragment extends Fragment implements ChamadoFragment
     private RecyclerView rvImagens;
     // Controller
     private ChamadoController chamadoController;
+    private LocalizacaoChamado localizacaoChamado;
 
     public NovaSolicitacaoFragment() {
     }
@@ -107,7 +111,7 @@ public class NovaSolicitacaoFragment extends Fragment implements ChamadoFragment
                     if ((ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) ||
                             (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA)) == PackageManager.PERMISSION_DENIED) {
                         String[] permision = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-                        requestPermissions(permision,PERMISSION_CODE);
+                        requestPermissions(permision, PERMISSION_CODE);
                     } else {
                         abrirCamera();
                     }
@@ -139,8 +143,8 @@ public class NovaSolicitacaoFragment extends Fragment implements ChamadoFragment
 
     private void abrirCamera() {
         ContentValues values = new ContentValues();
-        values.put(MediaStore.Images.Media.TITLE,"new image");
-        values.put(MediaStore.Images.Media.DESCRIPTION,"From InfraChenge Camera");
+        values.put(MediaStore.Images.Media.TITLE, "new image");
+        values.put(MediaStore.Images.Media.DESCRIPTION, "From InfraChenge Camera");
         this.image_uri = getContext().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
 
         Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -154,9 +158,9 @@ public class NovaSolicitacaoFragment extends Fragment implements ChamadoFragment
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        switch (requestCode){
+        switch (requestCode) {
             case PERMISSION_CODE:
-                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     abrirCamera();
                 } else {
                     exibindoToast("Permissão negada !");
@@ -168,10 +172,10 @@ public class NovaSolicitacaoFragment extends Fragment implements ChamadoFragment
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         try {
-            if(resultCode == Activity.RESULT_OK){
+            if (resultCode == Activity.RESULT_OK) {
                 this.chamadoController.listarImagens(this.pathsImagensCapturadas);
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             exibindoToast(e.getMessage());
         }
     }
@@ -183,7 +187,7 @@ public class NovaSolicitacaoFragment extends Fragment implements ChamadoFragment
         if (this.rbSelecionado == null) {
             throw new Exception("É necessario selecionar a Localização.");
         }
-        if (this.pathsImagensCapturadas.size() == 0){
+        if (this.pathsImagensCapturadas.size() == 0) {
             throw new Exception("É necessario adicionar ao menos uma imagem.");
         }
     }
@@ -230,5 +234,34 @@ public class NovaSolicitacaoFragment extends Fragment implements ChamadoFragment
     @Override
     public void carregandoBitmapImages(ImagensChamadoRecyclerViewAdapter adapter) {
         this.rvImagens.setAdapter(adapter);
+    }
+
+    public void buscarInformacoesGPS() {
+
+        if (enviaLocalizacao.equals("Sim")) {
+            if (ActivityCompat.checkSelfPermission(this.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                    ActivityCompat.checkSelfPermission(this.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+                String[] permision = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
+                requestPermissions(permision, PERMISSION_CODE);
+
+              /*  ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_COARSE_LOCATION}, 1); */
+                return;
+            }
+
+            LocationManager mLocManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+            this.localizacaoChamado = new LocalizacaoChamado();
+
+            //  mLocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, localizacaoChamado);
+
+            if (mLocManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                String texto = "Latitude: " + LocalizacaoChamado.latitude + "\n" +
+                        "Longitude: " + LocalizacaoChamado.longitude + "\n";
+                exibindoToast(texto);
+            } else {
+                exibindoToast("GPS Desabilitado");
+            }
+        }
     }
 }
